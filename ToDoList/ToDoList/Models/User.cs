@@ -29,6 +29,6 @@ namespace ToDoList.Models
         [ForeignKey("Role_id")]
         public virtual Role Role { get; set; }
 
-        public virtual ICollection<ToDo> Songs { get; set; }
+        public virtual ICollection<ToDo> ToDos { get; set; }
     }
 }
