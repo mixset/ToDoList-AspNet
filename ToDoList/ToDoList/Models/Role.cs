@@ -9,6 +9,5 @@ namespace ToDoList.Models
         public string Label { get; set; }
         public DateTime Created_at { get; set; }
 
-        public virtual User User { get; set; }
     }
 }

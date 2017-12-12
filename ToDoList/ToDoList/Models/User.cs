@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace ToDoList.Models
 {
@@ -23,6 +24,9 @@ namespace ToDoList.Models
         public string Email { get; set; }
 
         public DateTime Created_at { get; set; }
+
+        [DefaultValue(0)]
+        public int Status { get; set; }
 
         public int Role_id { get; set; }
 
