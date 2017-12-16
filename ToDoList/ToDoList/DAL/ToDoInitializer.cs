@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Data.Entity;
 using ToDoList.Models;
+using ToDoList.Migrations;
+using System.Data.Entity.Migrations;
 
 namespace ToDoList.DAL
 {
-    public class ToDoInitializer : DropCreateDatabaseAlways<ToDoContext>
+    public class ToDoInitializer : MigrateDatabaseToLatestVersion<ToDoContext, Configuration>
     {
-        protected override void Seed(ToDoContext context)
-        {
-            SeedToDoData(context);
-            base.Seed(context);
-        }
-
-        private void SeedToDoData(ToDoContext context)
+        public static void SeedToDoData(ToDoContext context)
         {
             var roles = new List<Role>
             {
@@ -24,7 +18,7 @@ namespace ToDoList.DAL
                 new Role() { Id = 2, Name = "user", Label = "Użytkownik", Created_at = DateTime.Now }
             };
 
-            roles.ForEach(k => context.Role.Add(k));
+            roles.ForEach(k => context.Role.AddOrUpdate(k));
             context.SaveChanges();
 
             var users = new List<User>
@@ -34,7 +28,7 @@ namespace ToDoList.DAL
                 new User() {Id = 3, Login = "Kamil", Password = "password", Email = "kamil@gmail.com", Created_at = DateTime.Now, Status = 0, Role_id = 2},
             };
 
-            users.ForEach(k => context.User.Add(k));
+            users.ForEach(k => context.User.AddOrUpdate(k));
             context.SaveChanges();
 
             var todos = new List<ToDo>
@@ -43,7 +37,7 @@ namespace ToDoList.DAL
                 new ToDo() { Id = 1, Label = "Zdać ten rok", Description = "Druga niesamowita notatka", Start_at = DateTime.Now, End_at = DateTime.Now.AddDays(1), Created_at = DateTime.Now, User_id = 3},
             };
 
-            todos.ForEach(k => context.ToDo.Add(k));
+            todos.ForEach(k => context.ToDo.AddOrUpdate(k));
             context.SaveChanges();
 
         }

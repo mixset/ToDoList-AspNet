@@ -4,8 +4,9 @@ namespace ToDoList.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using DAL;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ToDoList.DAL.ToDoContext>
+    public sealed class Configuration : DbMigrationsConfiguration<ToDoList.DAL.ToDoContext>
     {
         public Configuration()
         {
@@ -13,8 +14,10 @@ namespace ToDoList.Migrations
             ContextKey = "ToDoList.DAL.ToDoContext";
         }
 
-        protected override void Seed(ToDoList.DAL.ToDoContext context)
+        protected override void Seed(ToDoContext context)
         {
+            ToDoInitializer.SeedToDoData(context);
+
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
