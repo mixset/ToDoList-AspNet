@@ -14,10 +14,6 @@ namespace ToDoList.Controllers
 
         public ActionResult Index()
         {
-            Role rola = new Role { Name = "Admin", Label="Administator", Created_at = DateTime.Now };
-            db.Role.Add(rola);
-            db.SaveChanges();
-
             return View();
         }
 
