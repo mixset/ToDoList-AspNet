@@ -1,43 +1,75 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title — moja aplikacja platformy ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>@ViewBag.Title - ToDo APP</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link href="@Url.Content("~/Content/Images/logo.png")" rel="icon">
+    <link href="@Url.Content("~/Content/CSS/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/font-awesome.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/main.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/CSS/notyf.min.css")" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    @RenderSection("Stylesheet", required: false)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nazwa aplikacji", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="brand">
+                <a href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/Content/Images/logo.png")" alt="ToDo Logo" style="margin-left: 70px; width:25px; height:25px;" class="img-responsive logo"></a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informacje", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                </ul>
+            <div class="container-fluid">
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="@Url.Content("~/Content/Images/User.png")" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><i class="lnr lnr-user"></i> <span>Mój profil</span></a></li>
+                                <li><a href="#"><i class="lnr lnr-cog"></i> <span>Ustawienia</span></a></li>
+                                <li><a href="#"><i class="lnr lnr-exit"></i> <span>Wyloguj się</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="sidebar-nav" class="sidebar">
+            <div class="sidebar-scroll">
+                <nav>
+                    <ul class="nav">
+                        <li><a href="@Url.Action("Index")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                        <li><a href="@Url.Action("Register")"><span>Rejestracja</span></a></li>
+                        <li><a href="@Url.Action("Login")"><span>Logowanie</span></a></li>
+                        <li><a href="@Url.Action("Contact")"><span>Kontakt</span></a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
+
+        <div class="main">
+            <div class="main-content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
         <footer>
-            <p>&copy; @DateTime.Now.Year — moja aplikacja platformy ASP.NET</p>
+            <div class="container-fluid">
+                <p class="copyright">&copy; @DateTime.Now.Year - ToDo App. All Rights Reserved.</p>
+            </div>
         </footer>
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script src="@Url.Content("~/Scripts/respond.js")"></script>
+    <script src="@Url.Content("~/Scripts/notyf.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.slimscroll.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/klorofil-common.js")"></script>
+    @RenderSection("Javascripts", required: false)
 </body>
 </html>
