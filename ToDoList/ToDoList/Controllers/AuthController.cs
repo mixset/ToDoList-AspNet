@@ -23,7 +23,8 @@ namespace ToDoList.Controllers
                 db.SaveChanges();
                 ModelState.Clear();
 
-                ViewBag.Message = data.Login + "Successfully Registered";
+                ViewBag.Message = data.Login + " został poprawnie zarejstrowany!";
+                ViewBag.Status = "success";
             }
 
             return View();
@@ -42,21 +43,23 @@ namespace ToDoList.Controllers
             if (usr != null) {
                 Session["Id"] = usr.Id.ToString();
                 Session["Login"] = usr.Login.ToString();
-                return RedirectToAction("LoggedIn");
+                return RedirectToAction("Index", "ToDo");
             } else {
-                ModelState.AddModelError("", "Username or Password is wrong.");
+                ModelState.AddModelError("", "Login lub hasło są niepoprawne.");
             }
             
             return View();
         }
 
-        public ActionResult LoggedIn()
+        public static bool IsLogged()
         {
-            if (Session["Id"] != null) {
-                return View();
-            } else {
-                return RedirectToAction("Login");
-            }
+            return System.Web.HttpContext.Current.Session["Id"] != null && System.Web.HttpContext.Current.Session["Login"] != null;
+        }
+
+        public ActionResult LogOut()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

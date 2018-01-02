@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Strona głóna";
+}
+
+@section Stylesheet {
+    <link href="@Url.Content("~/Content/CSS/monthly.css")" rel="stylesheet">
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    To-Do List
+                </h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled todo-list">
+                    <li>
+                        <label class="control-inline fancy-checkbox">
+                            <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                            <span class="title">Restart Server</span>
+                            <span class="short-description">Dynamically integrate client-centric technologies without cooperative resources.</span>
+                            <span class="date">Oct 9, 2016</span>
+                        </p>
+                        <div class="controls">
+                            <a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="control-inline fancy-checkbox">
+                            <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                            <span class="title">Retest Upload Scenario</span>
+                            <span class="short-description">Compellingly implement clicks-and-mortar relationships without highly efficient metrics.</span>
+                            <span class="date">Oct 23, 2016</span>
+                        </p>
+                        <div class="controls">
+                            <a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="control-inline fancy-checkbox">
+                            <input type="checkbox"><span></span>
+                        </label>
+                        <p>
+                            <strong>Functional Spec Meeting</strong>
+                            <span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+                            <span class="date">Oct 11, 2016</span>
+                        </p>
+                        <div class="controls">
+                            <a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">My Tasks</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled task-list">
+                    <li>
+                        <p>Updating Users Settings <span class="label-percent">23%</span></p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width:23%">
+                                <span class="sr-only">23% Complete</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Load &amp; Stress Test <span class="label-percent">80%</span></p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <span class="sr-only">80% Complete</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Data Duplication Check <span class="label-percent">100%</span></p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                <span class="sr-only">Success</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Server Check <span class="label-percent">45%</span></p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
+                                <span class="sr-only">45% Complete</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Mobile App Development <span class="label-percent">10%</span></p>
+                        <div class="progress progress-xs">
+                            <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 10%">
+                                <span class="sr-only">10% Complete</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">Calendar</h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div style="max-width: 100%;display:inline-block;">
+                    <div class="monthly" id="mycalendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section JavaScripts {
+    <script src="@Url.Content("~/Scripts/calendar.js")"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#mycalendar').monthly({
+                mode: 'event',
+                jsonUrl: 'events.json',
+                dataType: 'json'
+            });
+
+            switch (window.location.protocol) {
+                case 'http:':
+                case 'https:':
+                    // running on a server, should be good.
+                    break;
+                case 'file:':
+                    alert('Just a heads-up, events will not work when run locally.');
+            }
+
+        });
+    </script>
+}
+}

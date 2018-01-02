@@ -1,7 +1,7 @@
 ﻿@model ToDoList.Models.User
 
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Logowanie";
 }
 
 <div class="row">
@@ -10,7 +10,7 @@
             <div class="panel-body">
                 <div class="content">
                     <div class="header">
-                        <p class="lead" style="text-align: center;">Login to your account</p>
+                        <p class="lead" style="text-align: center;">Logowanie</p>
                     </div>
                     @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "form-auth-small col-md-6 col-md-offset-3" }))
                     {

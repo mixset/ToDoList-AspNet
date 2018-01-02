@@ -39,10 +39,17 @@
             <div class="sidebar-scroll">
                 <nav>
                     <ul class="nav">
-                        <li><a href="@Url.Action("Index")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
-                        <li><a href="@Url.Action("Register")"><span>Rejestracja</span></a></li>
-                        <li><a href="@Url.Action("Login")"><span>Logowanie</span></a></li>
-                        <li><a href="@Url.Action("Contact")"><span>Kontakt</span></a></li>
+                    @if (ToDoList.Controllers.AuthController.IsLogged())
+                    {
+                        <li><a href="@Url.Action("Index", "ToDo")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                        <li><a href="@Url.Action("Register", "Auth")"><span>Lista notatek</span></a></li>
+                        <li><a href="@Url.Action("Login", "Auth")"><span>Dodaj notatkę</span></a></li>
+                        <li><a href="@Url.Action("LogOut", "Auth")"><span>Wyloguj</span></a></li>
+                    } else {
+                        <li><a href="@Url.Action("Index", "Home")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                        <li><a href="@Url.Action("Register", "Auth")"><span>Rejestracja</span></a></li>
+                        <li><a href="@Url.Action("Login", "Auth")"><span>Logowanie</span></a></li>
+                    }
                     </ul>
                 </nav>
             </div>
@@ -51,6 +58,13 @@
         <div class="main">
             <div class="main-content">
                 <div class="container-fluid">
+                    @if (@ViewBag.Message != null)
+                    {
+                    <div class="alert alert-@ViewBag.Status">
+                        @ViewBag.Message
+                    </div>
+                    }
+
                     @RenderBody()
                 </div>
             </div>
