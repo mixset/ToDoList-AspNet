@@ -1,4 +1,5 @@
-﻿@model ToDoList.ViewModel.UserViewModel
+﻿@model IEnumerable<ToDoList.Models.User>
+
 @{
     ViewBag.Title = "Profile";
 }
@@ -17,8 +18,8 @@
             </div>
             <div class="panel-body">
                 <table class="table table-hover">
-                    @foreach (var user in Model.User)
-                    {
+                    @foreach (var user in Model)
+                   {
                         <tr>
                             <td>Login</td>
                             <td>@user.Login</td>
@@ -32,8 +33,8 @@
                             <td>@user.Created_at</td>
                         </tr>
                         <tr>
-                            <td>Rola</td>
-                            <td>@user.Role_id</td>
+                            <td>Rola:</td>
+                            <td>@user.Role.Label</td>
                         </tr>
                     }
                 </table>

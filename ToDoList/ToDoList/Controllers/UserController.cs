@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using ToDoList.DAL;
 using ToDoList.Models;
-using ToDoList.ViewModel;
+using ToDoList.Repositories;
 
 namespace ToDoList.Controllers
 {
@@ -19,14 +19,7 @@ namespace ToDoList.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            var data = db.User.Where(u => u.Id == 1).ToList();
-
-            var resources = new UserViewModel
-            {
-                User = data
-            };
-
-            return View(resources);
+            return View(new UserRepository().getUserData());
         }
 
         public ActionResult Settings()

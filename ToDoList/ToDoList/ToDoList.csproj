@@ -157,6 +157,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\UserHelper.cs" />
     <Compile Include="Migrations\201712161252117_InitialCreate.cs" />
     <Compile Include="Migrations\201712161252117_InitialCreate.Designer.cs">
       <DependentUpon>201712161252117_InitialCreate.cs</DependentUpon>
@@ -166,6 +167,7 @@
     <Compile Include="Models\ToDo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
