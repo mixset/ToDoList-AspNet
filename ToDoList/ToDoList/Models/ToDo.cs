@@ -13,6 +13,7 @@ namespace ToDoList.Models
         public string Label { get; set; }
 
         [Required(ErrorMessage = "Pole opis jest wymagane.")]
+        [DataType(DataType.MultilineText)]
         [StringLength(200)]
         public string Description { get; set; }
 

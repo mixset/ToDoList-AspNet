@@ -19,20 +19,23 @@
             <div class="brand">
                 <a href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/Content/Images/logo.png")" alt="ToDo Logo" style="margin-left: 70px; width:25px; height:25px;" class="img-responsive logo"></a>
             </div>
-            <div class="container-fluid">
-                <div id="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="@Url.Content("~/Content/Images/User.png")" class="img-circle" alt="Avatar"> <span>Samuel</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#"><i class="lnr lnr-user"></i> <span>Mój profil</span></a></li>
-                                <li><a href="#"><i class="lnr lnr-cog"></i> <span>Ustawienia</span></a></li>
-                                <li><a href="#"><i class="lnr lnr-exit"></i> <span>Wyloguj się</span></a></li>
-                            </ul>
-                        </li>
-                    </ul>
+            @if (ToDoList.Controllers.AuthController.IsLogged())
+            {
+                <div class="container-fluid">
+                    <div id="navbar-menu">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="@Url.Content("~/Content/Images/user.png")" class="img-circle" alt="Avatar"> <span>@Session["Login"]</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Account", "User")"><i class="lnr lnr-user"></i> <span>Mój profil</span></a></li>
+                                    <li><a href="@Url.Action("Settings", "User")"><i class="lnr lnr-cog"></i> <span>Ustawienia</span></a></li>
+                                    <li><a href="@Url.Action("LogOut", "Auth")"><i class="lnr lnr-exit"></i> <span>Wyloguj się</span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            }
         </nav>
 
         <div id="sidebar-nav" class="sidebar">
@@ -41,10 +44,8 @@
                     <ul class="nav">
                     @if (ToDoList.Controllers.AuthController.IsLogged())
                     {
-                        <li><a href="@Url.Action("Index", "ToDo")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
-                        <li><a href="@Url.Action("Register", "Auth")"><span>Lista notatek</span></a></li>
-                        <li><a href="@Url.Action("Login", "Auth")"><span>Dodaj notatkę</span></a></li>
-                        <li><a href="@Url.Action("LogOut", "Auth")"><span>Wyloguj</span></a></li>
+                        <li><a href="@Url.Action("Index", "ToDo")"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                        <li><a href="@Url.Action("Add", "ToDo")"><span>Dodaj notatkę</span></a></li>
                     } else {
                         <li><a href="@Url.Action("Index", "Home")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
                         <li><a href="@Url.Action("Register", "Auth")"><span>Rejestracja</span></a></li>
@@ -78,7 +79,7 @@
     </div>
 
 
-    <script src="@Url.Content("~/Scripts/jquery-1.10.2.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery-1.12.4.min.js")"></script>
     <script src="@Url.Content("~/Scripts/bootstrap.js")"></script>
     <script src="@Url.Content("~/Scripts/respond.js")"></script>
     <script src="@Url.Content("~/Scripts/notyf.min.js")"></script>

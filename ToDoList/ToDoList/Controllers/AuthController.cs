@@ -41,7 +41,7 @@ namespace ToDoList.Controllers
             var usr = db.User.Where(u => u.Login == data.Login && u.Password == data.Password).FirstOrDefault();
             Console.WriteLine(usr);
             if (usr != null) {
-                Session["Id"] = usr.Id.ToString();
+                Session["Id"] = usr.Id;
                 Session["Login"] = usr.Login.ToString();
                 return RedirectToAction("Index", "ToDo");
             } else {

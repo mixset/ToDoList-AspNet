@@ -1,0 +1,43 @@
+﻿@model ToDoList.ViewModel.UserViewModel
+@{
+    ViewBag.Title = "Profile";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Konto
+                </h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    @foreach (var user in Model.User)
+                    {
+                        <tr>
+                            <td>Login</td>
+                            <td>@user.Login</td>
+                        </tr>
+                        <tr>
+                            <td>E-mail:</td>
+                            <td>@user.Email</td>
+                        </tr>
+                        <tr>
+                            <td>Data rejestracji:</td>
+                            <td>@user.Created_at</td>
+                        </tr>
+                        <tr>
+                            <td>Rola</td>
+                            <td>@user.Role_id</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
