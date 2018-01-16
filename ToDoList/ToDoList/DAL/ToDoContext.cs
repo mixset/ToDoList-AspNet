@@ -14,10 +14,10 @@ namespace ToDoList.DAL
         {
         }
 
-        static ToDoContext()
-        {
-            Database.SetInitializer<ToDoContext>(new ToDoInitializer());
-        }
+        //static ToDoContext()
+        //{
+        //    Database.SetInitializer<ToDoContext>(new ToDoInitializer());
+        //}
 
         public DbSet<Role> Role { get; set; }
         public DbSet<User> User { get; set; }

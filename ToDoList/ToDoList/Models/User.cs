@@ -13,21 +13,26 @@ namespace ToDoList.Models
 
         [Required(ErrorMessage = "Pole login jest wymagane.")]
         [StringLength(100)]
+        [Display(Name = "Nazwa użytkownika")]
         public string Login { get; set; }
 
         [Required(ErrorMessage = "Pole hasło jest wymagane.")]
         [StringLength(150)]
         [DataType(DataType.Password)]
+        [Display(Name = "Hasło")]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "Pole E-mail jest wymagane.")]
         [StringLength(200)]
+        [Display(Name = "E-mail")]
         public string Email { get; set; }
 
         [DefaultValue(0)]
+        [Display(Name = "Data utworzenia konta")]
         public DateTime Created_at { get; set; } = DateTime.Now;
 
         [DefaultValue(0)]
+        [Display(Name = "Status")]
         public int Status { get; set; }
 
         public int Role_id { get; set; } = 2;

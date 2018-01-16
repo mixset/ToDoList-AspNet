@@ -13,6 +13,16 @@
     {
       "id": 2,
       "name": "This is a JSON event",
+      "startdate": "2017-12-18",
+      "enddate": "2018-01-5",
+      "starttime": "12:00",
+      "endtime": "2:00",
+      "color": "#FFB128",
+      "url": ""
+    },
+    {
+      "id": 3,
+      "name": "This is a JSON event",
       "startdate": "2017-10-15",
       "enddate": "",
       "starttime": "12:00",

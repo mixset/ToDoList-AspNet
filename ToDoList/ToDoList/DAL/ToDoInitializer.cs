@@ -14,8 +14,7 @@ namespace ToDoList.DAL
             var roles = new List<Role>
             {
                 new Role() { Id = 1, Name = "admin", Label = "Administrator", Created_at = DateTime.Now },
-                // new Role() { Name = "moderator", Label = "Moderator", Created_at = DateTime.Now };
-                new Role() { Id = 2, Name = "user", Label = "Użytkownik", Created_at = DateTime.Now }
+                new Role() { Id = 2, Name = "user", Label = "Użytkownik", Created_at = DateTime.Now },
             };
 
             roles.ForEach(k => context.Role.AddOrUpdate(k));
@@ -33,8 +32,8 @@ namespace ToDoList.DAL
 
             var todos = new List<ToDo>
             {
-                new ToDo() { Id = 1, Label = "Tytuł pierwszej notatki", Description = "Bardzo ważna treść w pierwszej notatce", Start_at = DateTime.Now, End_at = DateTime.Now.AddDays(3), Created_at = DateTime.Now, User_id = 2},
-                new ToDo() { Id = 2, Label = "Zdać ten rok", Description = "Druga niesamowita notatka", Start_at = DateTime.Now, End_at = DateTime.Now.AddDays(1), Created_at = DateTime.Now, User_id = 3},
+                new ToDo() { Id = 1, Label = "Tytuł pierwszej notatki.", Description = "Bardzo ważna treść w pierwszej notatce.", Start_at = DateTime.Now, End_at = DateTime.Now.AddDays(3), Created_at = DateTime.Now, User_id = 2},
+                new ToDo() { Id = 2, Label = "Tytuł drugiej notatki.", Description = "Druga niesamowita notatka.", Start_at = DateTime.Now, End_at = DateTime.Now.AddDays(1), Created_at = DateTime.Now, User_id = 3},
             };
 
             todos.ForEach(k => context.ToDo.AddOrUpdate(k));

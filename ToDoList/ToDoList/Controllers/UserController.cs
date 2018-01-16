@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
+using ToDoList.Attributes;
 using ToDoList.DAL;
 using ToDoList.Models;
-using ToDoList.Repositories;
 
 namespace ToDoList.Controllers
 {
@@ -12,24 +12,49 @@ namespace ToDoList.Controllers
     {
         private ToDoContext db = new ToDoContext();
 
-        public ActionResult Account()
+        public ActionResult Details()
         {
-            if (AuthController.IsLogged() == false)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            int user_id = (int)Session["Id"];
 
-            return View(new UserRepository().getUserData());
+            var data = from user in db.User.Include("Role")
+                        where user.Id == user_id
+                        select user;
+
+            return View(data.ToList());
         }
 
-        public ActionResult Settings()
+        public ActionResult Edit(int? id)
         {
-            if (AuthController.IsLogged() == false)
+            if (id == null)
             {
-                return RedirectToAction("Index", "Home");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            return View();
+            User toDo = db.User.Find(id);
+
+            if (toDo == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(toDo);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Password,Email")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Message = "Edycja użytkownika zakończyła się sukcesem.";
+            ViewBag.Status = "success";
+
+            return View(user);
         }
     }
 }

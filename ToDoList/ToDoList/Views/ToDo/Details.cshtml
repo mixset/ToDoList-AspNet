@@ -1,0 +1,45 @@
+﻿@model ToDoList.Models.ToDo
+
+@{
+    ViewBag.Title = "Szczegóły zadania";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Szczegóły zadania
+                </h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Label)</td>
+                        <td>@Html.DisplayFor(model => model.Label)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Description)</td>
+                        <td>@Html.DisplayFor(model => model.Description)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Start_at)</td>
+                        <td>@Html.DisplayFor(model => model.Start_at)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.End_at)</td>
+                        <td>@Html.DisplayFor(model => model.End_at)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Created_at)</td>
+                        <td>@Html.DisplayFor(model => model.Created_at)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

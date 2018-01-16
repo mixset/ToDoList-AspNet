@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ToDoList.DAL;
@@ -13,6 +15,11 @@ namespace ToDoList.Controllers
         public ActionResult Register()
         {
             return View();
+        }
+
+        public void RedirectToHome()
+        {
+            RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
@@ -39,7 +46,7 @@ namespace ToDoList.Controllers
         public ActionResult Login(User data)
         {       
             var usr = db.User.Where(u => u.Login == data.Login && u.Password == data.Password).FirstOrDefault();
-            Console.WriteLine(usr);
+
             if (usr != null) {
                 Session["Id"] = usr.Id;
                 Session["Login"] = usr.Login.ToString();
@@ -60,6 +67,12 @@ namespace ToDoList.Controllers
         {
             Session.Clear();
             return RedirectToAction("Index", "Home");
+        }
+
+        public string GetUserRole(int User_id)
+        {
+            var data = db.User.Where(u => u.Id == User_id).Include("Role").FirstOrDefault();
+            return data.Role.Name;
         }
     }
 }
