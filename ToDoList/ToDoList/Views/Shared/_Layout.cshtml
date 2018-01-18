@@ -44,8 +44,16 @@
                     <ul class="nav">
                     @if (ToDoList.Controllers.AuthController.IsLogged())
                     {
-                        <li><a href="@Url.Action("Index", "ToDo")"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
-                        <li><a href="@Url.Action("Add", "ToDo")"><span>Dodaj notatkę</span></a></li>
+                        if ((int)Session["role"] == 1)
+                        {
+                            <li><a href="@Url.Action("Index", "Admin")"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                            <li><a href="@Url.Action("Index", "Role")"><span>Role</span></a></li>
+                        }
+                        else
+                        {
+                            <li><a href="@Url.Action("Index", "ToDo")"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
+                            <li><a href="@Url.Action("Add", "ToDo")"><span>Dodaj notatkę</span></a></li>
+                        }
                     } else {
                         <li><a href="@Url.Action("Index", "Home")" class="active"><i class="lnr lnr-home"></i> <span>Strona główna</span></a></li>
                         <li><a href="@Url.Action("Register", "Auth")"><span>Rejestracja</span></a></li>

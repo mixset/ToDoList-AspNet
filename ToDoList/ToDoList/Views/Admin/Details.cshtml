@@ -1,0 +1,49 @@
+﻿@model ToDoList.Models.User
+
+@{
+    ViewBag.Title = "Szczególy użytkownika";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Szczegóły użytkownika
+                </h3>
+                <div class="right">
+                    <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+                    <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+                </div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Login)</td>
+                        <td>@Html.DisplayFor(model => model.Login)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Email)</td>
+                        <td>@Html.DisplayFor(model => model.Email)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Created_at)</td>
+                        <td>@Html.DisplayFor(model => model.Created_at)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Status)</td>
+                        <td>@Html.DisplayFor(model => model.Status)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Created_at)</td>
+                        <td>@Html.DisplayFor(model => model.Created_at)</td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Role.Label)</td>
+                        <td>@Html.DisplayFor(model => model.Role.Label)</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

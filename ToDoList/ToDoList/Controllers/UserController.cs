@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ToDoList.Attributes;
 using ToDoList.DAL;
 using ToDoList.Models;
+using ToDoList.Utils.Attributes;
 
 namespace ToDoList.Controllers
 {
@@ -12,6 +12,7 @@ namespace ToDoList.Controllers
     {
         private ToDoContext db = new ToDoContext();
 
+        [AppAuthorize("user", "admin")]
         public ActionResult Details()
         {
             int user_id = (int)Session["Id"];
@@ -23,6 +24,7 @@ namespace ToDoList.Controllers
             return View(data.ToList());
         }
 
+        [AppAuthorize("user", "admin")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -42,6 +44,7 @@ namespace ToDoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AppAuthorize("user", "admin")]
         public ActionResult Edit([Bind(Include = "Password,Email")] User user)
         {
             if (ModelState.IsValid)

@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using ToDoList.Attributes;
 using ToDoList.DAL;
 using ToDoList.Models;
+using ToDoList.Utils.Attributes;
 
 namespace ToDoList.Controllers
 {
@@ -13,6 +17,7 @@ namespace ToDoList.Controllers
     {
         private ToDoContext db = new ToDoContext();
 
+        [AppAuthorize("user")]
         public ActionResult Index()
         {
             int user_id = (int) Session["Id"];
@@ -22,9 +27,61 @@ namespace ToDoList.Controllers
                        where t.User_id == user_id
                        select t;
 
+            createJSONFile(user_id);
+
             List<ToDo> list = data.ToList();
 
             return View(list);
+        }
+        
+        private void createJSONFile(int user_id)
+        {
+           string json = string.Empty;
+            json = "{\"monthly\": ";
+
+            List<object> objects = new List<object>();
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ToDoContext"].ConnectionString))
+            {
+                conn.Open();
+                using (SqlCommand command = conn.CreateCommand())
+                {
+                    List<string> columns = new List<string>
+                    {
+                        "id",
+                        "name",
+                        "startdate",
+                        "enddate",
+                        "color",
+                        "url"
+                    };
+
+                    command.CommandText = "SELECT Id, Label, Start_at, End_at FROM dbo.ToDo WHERE User_id = " + user_id;
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            IDictionary<string, object> record = new Dictionary<string, object>();
+                            for (int i = 0; i < reader.FieldCount; i++)
+                            {
+                                record.Add(columns.ElementAt(i), reader[i]);
+                            }
+
+                            record.Add(columns.ElementAt(4), "#FFB128");
+                            record.Add(columns.ElementAt(5), "");
+
+                            objects.Add(record);
+                        }
+                    }
+                }
+            }
+
+            json += JsonConvert.SerializeObject(objects); 
+            json += "  }";
+
+            using (StreamWriter sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "event.json"))
+            {
+                sw.Write(json);
+            }
         }
 
         public ActionResult Add()
@@ -34,6 +91,7 @@ namespace ToDoList.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AppAuthorize("user")]
         public ActionResult Add(ToDo data)
         {
             if (ModelState.IsValid)
@@ -51,6 +109,7 @@ namespace ToDoList.Controllers
             return View();
         }
 
+        [AppAuthorize("user")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -67,24 +126,30 @@ namespace ToDoList.Controllers
 
             return View(toDo);
         }
+ 
 
-        /*
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Label,Description,Start_at,End_at")] ToDo toDo)
+        [AppAuthorize("user")]
+        public ActionResult Edit([Bind(Include = "Id,Label,Description,")] ToDo toDo)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(toDo).State = EntityState.Modified;
                 db.SaveChanges();
+
+                Session["Message"] = "Zmiany w notatce zostały zapisane poprawnie..";
+                Session["Status"] = "success";
+
                 return RedirectToAction("Index");
             }
-            ViewBag.User_id = new SelectList(db.User, "Id", "Login", toDo.User_id);
+
+            ViewBag.User_id = Session["Id"];
+
             return View(toDo);
         }
-        */
 
-        // GET: ToDoes/Edit/5
+        [AppAuthorize("user")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -101,7 +166,8 @@ namespace ToDoList.Controllers
 
             return View(toDo);
         }
-  
+
+        [AppAuthorize("user")]
         public ActionResult Delete(int id)
         {
             ToDo toDo = db.ToDo.Find(id);

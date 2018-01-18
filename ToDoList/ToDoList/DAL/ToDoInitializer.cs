@@ -20,11 +20,13 @@ namespace ToDoList.DAL
             roles.ForEach(k => context.Role.AddOrUpdate(k));
             context.SaveChanges();
 
+            // haslo -> test
+
             var users = new List<User>
             {
-                new User() {Id = 1, Login = "Franek", Password = "password" , Email = "franek@gmail.com", Created_at = DateTime.Now, Status = 1 , Role_id = 1},
-                new User() {Id = 2, Login = "Maciek", Password = "password", Email = "maciek@gmail.com", Created_at = DateTime.Now, Status = 0, Role_id = 2},
-                new User() {Id = 3, Login = "Kamil", Password = "password", Email = "kamil@gmail.com", Created_at = DateTime.Now, Status = 0, Role_id = 2},
+                new User() {Id = 1, Login = "admin", Password = "9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08" , Email = "admin@gmail.com", Created_at = DateTime.Now, Status = 1 , Role_id = 1},
+                new User() {Id = 2, Login = "user_1", Password = "9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08", Email = "user_1@gmail.com", Created_at = DateTime.Now, Status = 0, Role_id = 2},
+                new User() {Id = 3, Login = "user_2", Password = "9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08", Email = "user_2@gmail.com", Created_at = DateTime.Now, Status = 0, Role_id = 2},
             };
 
             users.ForEach(k => context.User.AddOrUpdate(k));

@@ -148,8 +148,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Utils\Attributes\LoggedInAttribute.cs" />
-    <Compile Include="Utils\Attributes\RoleAttribute.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Utils\Attributes\AppAuthorize.cs" />
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ToDoController.cs" />
@@ -168,7 +169,9 @@
     <Compile Include="Models\ToDo.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Helpers\HashHelper.cs" />
     <Compile Include="Utils\Helpers\SliderHelper.cs" />
+    <Compile Include="Utils\Validators\PasswordLength.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\CSS\bootstrap.css" />
@@ -276,6 +279,10 @@
     <Content Include="Views\ToDo\Details.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Admin\Details.cshtml" />
+    <Content Include="Views\Admin\Edit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

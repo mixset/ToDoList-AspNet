@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using ToDoList.DAL;
 using ToDoList.Models;
+using ToDoList.Utils.Helpers;
 
 namespace ToDoList.Controllers
 {
@@ -25,7 +24,8 @@ namespace ToDoList.Controllers
         [HttpPost]
         public ActionResult Register(User data)
         {
-            if (ModelState.IsValid) { 
+            if (ModelState.IsValid) {
+                data.Password = HashHelper.GenerateSHA256String(data.Password);
                 db.User.Add(data);
                 db.SaveChanges();
                 ModelState.Clear();
@@ -44,15 +44,27 @@ namespace ToDoList.Controllers
 
         [HttpPost]
         public ActionResult Login(User data)
-        {       
-            var usr = db.User.Where(u => u.Login == data.Login && u.Password == data.Password).FirstOrDefault();
+        {
+            data.Password = HashHelper.GenerateSHA256String(data.Password);
+
+            var usr = db.User.Where(u => u.Login == data.Login && u.Password == data.Password && u.Status == 1).FirstOrDefault();
 
             if (usr != null) {
                 Session["Id"] = usr.Id;
                 Session["Login"] = usr.Login.ToString();
-                return RedirectToAction("Index", "ToDo");
+                string role = GetUserRole(usr.Id).Name;
+
+                Session["Role"] = GetUserRole(usr.Id).Id;
+                if (role.Equals("user"))
+                {
+                    return RedirectToAction("Index", "ToDo");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             } else {
-                ModelState.AddModelError("", "Login lub hasło są niepoprawne.");
+                ModelState.AddModelError("", "Login lub hasło są niepoprawne lub Twoje konto jest nieaktywne.");
             }
             
             return View();
@@ -69,10 +81,10 @@ namespace ToDoList.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public string GetUserRole(int User_id)
+        public Role GetUserRole(int User_id)
         {
             var data = db.User.Where(u => u.Id == User_id).Include("Role").FirstOrDefault();
-            return data.Role.Name;
+            return data.Role;
         }
     }
 }
