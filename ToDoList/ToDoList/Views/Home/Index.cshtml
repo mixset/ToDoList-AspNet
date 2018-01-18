@@ -1,50 +1,31 @@
-﻿@{
+﻿@using ToDoList.Utils.Helpers;
+@{
     ViewBag.Title = "Strona główna";
-}
-
-@section Stylesheet {
-    <link href="@Url.Content("~/Content/CSS/monthly.css")" rel="stylesheet">
 }
 
 <div class="row">
     <div class="col-md-12">
         <div class="panel">
             <div class="panel-heading">
-                <h3 class="panel-title">To-Do List</h3>
+                <h3 class="panel-title text-center">Niesamowita strona główna ToDo APP</h3>
                 <div class="right">
                     <button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
                     <button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
                 </div>
             </div>
-            <div class="panel-body">   
-                <p>Treść strony głównej</p>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="center-block col-md-8" style="float: none;">
+                        @Html.Slider("carousel-example-generic", (List<string>)ViewData["Slides"])
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
-@section JavaScripts {
-    <script src="@Url.Content("~/Scripts/calendar.js")"></script>
-
+@section Javascripts {
     <script>
-        $(document).ready(function () {
-
-            $('#mycalendar').monthly({
-                mode: 'event',
-                jsonUrl: 'events.json',
-                dataType: 'json'
-            });
-
-            switch (window.location.protocol) {
-                case 'http:':
-                case 'https:':
-                    // running on a server, should be good.
-                    break;
-                case 'file:':
-                    alert('Just a heads-up, events will not work when run locally.');
-            }
-
-        });
+        $('.carousel').carousel()
     </script>
 }
